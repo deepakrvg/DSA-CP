@@ -8,9 +8,10 @@ using namespace std;
 int mod = 1e9 + 7;
 
 
-int ans = 0;
+// int ans = 0;
 
-void merge(int arr[], int l, int m, int r) {
+int merge(int arr[], int l, int m, int r) {
+	int ans = 0;
 	int n1 = m - l + 1;
 	int n2 = r - m;
 
@@ -38,19 +39,22 @@ void merge(int arr[], int l, int m, int r) {
 	while (j < n2) {
 		arr[k++] = q[j++];
 	}
+	return ans;
 }
 
-void mergeSort(int arr[], int l, int r) {
+int mergeSort(int arr[], int l, int r) {
+	int ans = 0;
 	if (l < r) {
 		int m = l + (r - l) / 2;
-		mergeSort(arr, l, m);
-		mergeSort(arr, m + 1, r);
-		merge(arr, l, m, r);
+		ans += mergeSort(arr, l, m);
+		ans += mergeSort(arr, m + 1, r);
+		ans += merge(arr, l, m, r);
 	}
+	return ans;
 }
 
 int inversionCount(int arr[], int N) {
-	mergeSort(arr, 0, N - 1);
+	int ans = mergeSort(arr, 0, N - 1);
 	return ans;
 }
 
@@ -61,8 +65,8 @@ int abc() {
 	for (int i = 0; i < n; i++) {
 		cin >> a[i];
 	}
-	inversionCount(a, n);
 
+	int ans = inversionCount(a, n);
 	cout << ans;
 
 	cout << "\n";
