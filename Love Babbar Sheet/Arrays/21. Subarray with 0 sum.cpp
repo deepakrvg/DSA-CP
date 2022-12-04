@@ -9,7 +9,7 @@ int mod = 1e9 + 7;
 
 
 bool subArrayExists(int arr[], int n) {
-	map<int, int> mp;
+	unordered_map<int, int> mp;
 	for (int i = 0; i < n; i++) {
 		if (i) arr[i] = arr[i] + arr[i - 1];
 		mp[arr[i]]++;
