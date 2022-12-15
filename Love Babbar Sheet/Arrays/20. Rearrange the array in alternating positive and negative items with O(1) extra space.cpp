@@ -9,49 +9,28 @@ int mod = 1e9 + 7;
 
 
 
-void solve(int arr[], int n) {
-	vector<int> pos, neg;
+void rearrange(long long *arr, int n) {
+	vector<int> mx, mn;
 	for (int i = 0; i < n; i++) {
-		if (arr[i] < 0) {
-			neg.push_back(arr[i]);
+		if (i < n / 2) {
+			mn.push_back(arr[i]);
 		}
 		else {
-			pos.push_back(arr[i]);
+			mx.push_back(arr[i]);
 		}
 	}
-	if (pos.size() > neg.size()) {
-		int i = 0, j = 0;
-		int k = 0;
-		while (i < pos.size() && j < neg.size()) {
-			arr[k] = pos[i];
-			k++;
-			i++;
-			arr[k] = neg[j];
-			k++;
-			j++;
-		}
-		while (i < pos.size()) {
-			arr[k] = pos[i];
-			k++;
-			i++;
-		}
+
+	int j = 0;
+	int mnlen = mn.size();
+	int mxlen = mx.size();
+	for (int i = 0; i < mnlen; i++) {
+		arr[j] = mx[mxlen - i - 1];
+		j++;
+		arr[j] = mn[i];
+		j++;
 	}
-	else {
-		int i = 0, j = 0;
-		int k = 0;
-		while (i < pos.size() && j < neg.size()) {
-			arr[k] = neg[j];
-			k++;
-			j++;
-			arr[k] = pos[i];
-			k++;
-			i++;
-		}
-		while (j < neg.size()) {
-			arr[k] = neg[j];
-			k++;
-			j++;
-		}
+	if (n % 2) {
+		arr[n - 1] = mx[0];
 	}
 }
 
@@ -63,7 +42,7 @@ int abc() {
 		cin >> arr[i];
 	}
 
-	solve(arr, n);
+	rearrange(arr, n);
 	for (int i = 0; i < n; i++) {
 		cout << arr[i] << " ";
 	}
