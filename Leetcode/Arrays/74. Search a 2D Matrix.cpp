@@ -12,7 +12,7 @@ bool searchMatrix(vector<vector<int>>& matrix, int target) {
 	int n = matrix.size();
 	int m = matrix[0].size();
 
-	// find the index in first column <= target
+	// find the index in first column <= target using binary search
 	int lo = 0;
 	int hi = n - 1;
 	int k = 0;
@@ -27,7 +27,7 @@ bool searchMatrix(vector<vector<int>>& matrix, int target) {
 		}
 	}
 	
-	// for kth row find the index with value target
+	// for kth row find the index with value target using binary search
 	lo = 0;
 	hi = m - 1;
 	int index = 0;
