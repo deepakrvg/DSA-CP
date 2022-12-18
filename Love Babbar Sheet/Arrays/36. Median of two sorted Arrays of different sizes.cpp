@@ -9,47 +9,52 @@ int mod = 1e9 + 7;
 
 
 
-int solve(int a[], int b[], int n, int m) {
-	int c[n + m];
-	int i = 0, j = 0, k = 0;
-	while (i < n && j < m) {
-		if (a[i] <= b[j]) {
-			c[k++] = a[i++];
+
+double solve(vector<int> &a, vector<int> &b, int n, int m) {
+	int lo = 0;
+	int hi = n;
+	while (lo <= hi) {
+		int cnt1 = (lo + hi) / 2;
+		int cnt2 = ((n + m + 1) / 2) - cnt1;
+		
+		int l1 = cnt1 == 0 ? INT_MIN : a[cnt1 - 1];
+		int l2 = cnt2 == 0 ? INT_MIN : b[cnt2 - 1];
+		int r1 = cnt1 == n ? INT_MAX : a[cnt1];
+		int r2 = cnt2 == m ? INT_MAX : b[cnt2];
+
+		if (l1 <= r2 && l2 <= r1) {
+			if ((n + m) % 2 == 0) {
+				return (max(l1, l2) + min(r1, r2)) / 2.0;
+			}
+			else {
+				return max(l1, l2);
+			}
+		}
+		else if (l1 > r2) {
+			hi = cnt1 - 1;
 		}
 		else {
-			c[k++] = b[j++];
+			lo = cnt1 + 1;
 		}
 	}
-	while (i < n) {
-		c[k++] = a[i++];
-	}
-	while (j < m) {
-		c[k++] = b[j++];
-	}
-	if ((n + m) % 2) {
-		return c[(n + m) / 2];
-	}
-	else {
-		return (c[(n + m - 1) / 2] + c[(n + m) / 2]) / 2;
-	}
+	return 0.0;
 }
 
 int abc() {
 	int n;
 	cin >> n;
-	int a[n];
+	vector<int> a(n);
 	for (int i = 0; i < n; i++) {
 		cin >> a[i];
 	}
 	int m;
 	cin >> m;
-	int b[m];
+	vector<int> b(m);
 	for (int i = 0; i < m; i++) {
 		cin >> b[i];
 	}
 
 	auto ans = solve(a, b, n, m);
-
 	cout << ans;
 
 	cout << "\n";
