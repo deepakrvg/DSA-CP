@@ -13,7 +13,9 @@ int rowWithMax1s(vector<vector<int> > arr, int n, int m) {
 	int ans = 0;
 	int i = 0, j = m - 1;
 	int cnt = 0;
+
 	while (i < n) {
+		// continue checking from the previous rowth jth value
 		while (j >= 0 && arr[i][j] == 1) {
 			cnt++;
 			j--;
