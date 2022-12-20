@@ -5,22 +5,34 @@ using namespace std;
 
 #define int long long
 
+#define MAX 1000
 int mod = 1e9 + 7;
 
 
 long long trappingWater(int arr[], int n) {
-	int left[n], right[n];
-	left[0] = arr[0];
-	right[n - 1] = arr[n - 1];
-	for (int i = 1; i < n; i++) {
-		left[i] = max(left[i - 1], arr[i]);
-	}
-	for (int i = n - 2; i >= 0; i--) {
-		right[i] = max(right[i + 1], arr[i]);
-	}
-	int ans = 0;
-	for (int i = 0; i < n; i++) {
-		ans += ((min(left[i], right[i])) - (arr[i]) );
+	int l = 0;
+	int r = n - 1;
+	int lmax = 0, rmax = 0;
+	long long ans = 0;
+	while (l <= r) {
+		if (arr[l] <= arr[r]) {
+			if (arr[l] > lmax) {
+				lmax = arr[l];
+			}
+			else {
+				ans += lmax - arr[l];
+			}
+			l++;
+		}
+		else {
+			if (arr[r] > rmax) {
+				rmax = arr[r];
+			}
+			else {
+				ans += rmax - arr[r];
+			}
+			r--;
+		}
 	}
 	return ans;
 }
@@ -34,7 +46,6 @@ int abc() {
 	}
 
 	auto ans = trappingWater(arr, n);
-
 	cout << ans;
 
 	cout << "\n";
