@@ -1,3 +1,14 @@
+/*
+You are in a maze, find the shortest path to exit. You are given multiple starting position and multiple exit. You can start from any strating point and end at any point
+#S...#
+####.#
+S....E
+.#S...
+.####.
+E....E
+output:- 3
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 
