@@ -33,7 +33,7 @@ int mod = 1e9 + 7;
 
 vector<string> g;
 vector<vector<int>> dist;
-vector<vector<pair<int, int>>> par;
+vector<vector<pi>> par;
 int dx[] = {1, 0, -1, 0};
 int dy[] = {0, 1, 0, -1};
 int n, m;
@@ -54,10 +54,17 @@ void bfs(pi st) {
 		for (int i = 0; i < 4; i++) {
 			if (check(node.F + dx[i], node.S + dy[i]) && dist[node.F + dx[i]][node.S + dy[i]] > dist[node.F][node.S] + 1) {
 				dist[node.F + dx[i]][node.S + dy[i]] = dist[node.F][node.S] + 1;
+				par[node.F + dx[i]][node.S + dy[i]] = {node.F, node.S};
 				q.push(make_pair(node.F + dx[i], node.S + dy[i]));
 			}
 		}
 	}
+}
+
+void printPath(pi en) {
+	if (en.F == -1 && en.S == -1) return;
+	printPath(par[en.F][en.S]);
+	cout << en.F << " " << en.S << "\n";
 }
 
 int abc() {
@@ -69,11 +76,12 @@ int abc() {
 	for (int i = 0; i < n; i++) {
 		cin >> g[i];
 	}
-	pair<int, int> st, en;
+	pi st, en;
 	cin >> st.F >> st.S;
 	cin >> en.F >> en.S;
 
 	bfs(st);
+	printPath(en);
 	cout << dist[en.F][en.S];
 
 	cout << "\n";
