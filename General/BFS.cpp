@@ -1,3 +1,22 @@
+/*
+You are in a maze, find the shortest path to exit. You are given your starting position and one exit.
+#S...#
+####.#
+......
+.#....
+.####.
+E.....
+output:- 12
+
+Follow up:- if there is a monster that will eat you up, then can you exit safe?
+If monster can move or stay at a postion.
+Solution:- if (dist(S, E) < dist(M, E)) then you can exit safe
+
+Follow up:- If there are multiple monsters?
+Solution:- if (dist(S, E) < dist(M, E) for all Monsters then you can exit safe
+instead of calculating bfs for all monsters, calculate bfs only once for exit
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 
