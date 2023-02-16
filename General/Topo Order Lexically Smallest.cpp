@@ -18,7 +18,7 @@ vector<int> topo;
 vector<int> indegree;
 int n, m;
 
-void khan() {
+void kahn() {
 	priority_queue<int, vector<int>, greater<int>> q;
 	for (int i = 1; i <= n; i++) {
 		if (indegree[i] == 0) {
@@ -51,7 +51,7 @@ int abc() {
 		g[a].push_back(b);
 		indegree[b]++;
 	}
-	khan();
+	kahn();
 	for (auto x : topo) {
 		cout << x << " ";
 	}
