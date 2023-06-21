@@ -79,6 +79,24 @@ Node* insert_at_pos(Node* head, int index, int x) {
     return head;
 }
 
+Node* insert_sorted(Node *head, int x) {
+    Node *new_node = new Node(x);
+    Node *temp = head;
+    if (head == NULL) {
+        return new_node;
+    }
+    if (x < new_node->data) {
+        new_node->next = head;
+        return new_node;   
+    }
+    while (temp->next != NULL && x > temp->next->data) {
+        temp = temp->next;
+    }
+    new_node->next = temp->next;
+    temp->next = new_node;
+    return head;
+}
+
 void print_linkedlist(Node *head) {
     while (head != NULL) {
         cout << head->data << " ";
@@ -97,9 +115,9 @@ int main() {
         head = insert_end(head, x);
     }
 
-    int x, index;
-    cin >> index >> x;
-    head = insert_at_pos(head, index, x);
+    int x;
+    cin >> x;
+    head = insert_sorted(head, x);
     print_linkedlist(head);
 
     return 0;
