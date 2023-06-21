@@ -24,8 +24,10 @@ Node *insert(Node *head, int x) {
 }
 
 int kth_node_from_end(Node *head, int k) {
+    if (head == NULL) return -1;
     Node *first = head, *second = head;
     while (k--) {
+        if (first == NULL) return -1;
         first = first->next;
     }
     while (first != NULL) {
