@@ -7,11 +7,16 @@ using namespace std;
 
 
 void rec(int n) {
+    // base case
     if (n == 1) {
         cout << 1 << " ";
         return;
     }
+
+    // hypothesis
     rec(n - 1);
+
+    // induction
     cout << n << " ";
 }
 
